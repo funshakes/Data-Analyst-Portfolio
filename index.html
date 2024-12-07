@@ -8,24 +8,28 @@
 </head>
 <body>
     <header>
-        <h1>Привет! Я Семён</h1>
-        <p>Дата-аналитик, любящий работать с данными и создавать крутые отчеты.</p>
+        <div class="container">
+            <h1>Привет! Я Семён</h1>
+            <p>Дата-аналитик, увлечённый работой с данными и созданием аналитических решений.</p>
+        </div>
     </header>
-    <main>
+    <main class="container">
+        <section id="about">
+            <h2>Обо мне</h2>
+            <p>Я люблю анализировать данные, решать сложные задачи и представлять результаты в понятной форме. Работал с Power BI, SQL и Python.</p>
+        </section>
         <section id="projects">
             <h2>Мои проекты</h2>
-            <ul>
-                <li>
-                    <a href="projects/powerbi.html">Проекты Power BI</a>
-                </li>
-                <li>
-                    <a href="projects/sql.html">SQL Задачи</a>
-                </li>
-            </ul>
-        </section>
-        <footer>
-            <p>Связаться: <a href="mailto:andrianov.semen@list.ru">andrianov.semen@list.ru</a></p>
-        </footer>
-    </main>
-</body>
-</html>
+            <div class="project-list">
+                <div class="project-card">
+                    <h3>Power BI</h3>
+                    <p>Визуализация данных и дашборды.</p>
+                    <a href="projects/powerbi.html" class="btn">Посмотреть</a>
+                </div>
+                <div class="project-card">
+                    <h3>SQL</h3>
+                    <p>Решение задач на LeetCode.</p>
+                    <a href="projects/sql.html" class="btn">Посмотреть</a>
+                </div>
+                <div class="project-card">
+   
