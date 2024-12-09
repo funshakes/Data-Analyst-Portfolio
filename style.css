@@ -41,6 +41,11 @@ h2 {
     padding-bottom: 0.3rem;
 }
 
+.project {
+    color: #0078d7;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
 .project-list {
     display: flex;
     flex-wrap: wrap;
