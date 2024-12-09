@@ -85,7 +85,12 @@ h2 {
 
 .project {
     color: #0078d7;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.project:hover {
+    transform: scale(1.05);
 }
 
 .sql-query {
