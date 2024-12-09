@@ -41,10 +41,6 @@ h2 {
     padding-bottom: 0.3rem;
 }
 
-.project {
-    color: #0078d7;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
 
 .project-list {
     display: flex;
@@ -85,6 +81,11 @@ h2 {
 .project-card p {
     font-size: 0.9rem;
     color: #666;
+}
+
+.project {
+    color: #0078d7;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .sql-query {
