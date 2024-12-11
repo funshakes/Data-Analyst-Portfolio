@@ -1,16 +1,16 @@
--- 1. просмотрим информацию которую собираемся использовать
+-- 1. РџСЂРѕСЃРјРѕС‚СЂРёРј РёРЅС„РѕСЂРјР°С†РёСЋ РєРѕС‚РѕСЂСѓСЋ СЃРѕР±РёСЂР°РµРјСЃСЏ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ
 Select Location, date, total_cases, new_cases, total_deaths, population
 From PortfolioProject1..CovidDeaths
 Where continent is not null
 order by 1,2
 
--- 2. Создадим view с процентом смертей во всем мире
+-- 2. РЎРѕР·РґР°РґРёРј view СЃ РїСЂРѕС†РµРЅС‚РѕРј СЃРјРµСЂС‚РµР№ РІРѕ РІСЃРµРј РјРёСЂРµ
 Create View WorldTotalDeaths as
 Select SUM(new_cases) as total_cases, SUM(cast(new_deaths as int)) as total_deaths, SUM(cast(new_deaths as int))/SUM(New_Cases)*100 as DeathPercentage
 From PortfolioProject1..CovidDeaths
 where continent is not null 
 
--- 3. Создадим view с кол-вом смертей по континентам
+-- 3. РЎРѕР·РґР°РґРёРј view СЃ РєРѕР»-РІРѕРј СЃРјРµСЂС‚РµР№ РїРѕ РєРѕРЅС‚РёРЅРµРЅС‚Р°Рј
 Create View ContinentDeathCount as
 Select Location, MAX(cast(Total_deaths as int)) AS TotalDeath 
 From PortfolioProject1..CovidDeaths
@@ -18,13 +18,13 @@ Where continent is not null
 and location not in ('World', 'European Union', 'International')
 Group by Location
 
--- 4. Создаем view с самыми высокими процентами заражений по отношению к населению
+-- 4. РЎРѕР·РґР°РµРј view СЃ СЃР°РјС‹РјРё РІС‹СЃРѕРєРёРјРё РїСЂРѕС†РµРЅС‚Р°РјРё Р·Р°СЂР°Р¶РµРЅРёР№ РїРѕ 
 Create View HighestInfectionRate as
 Select Location, population, MAX(total_cases) AS HighestInfRate, MAX(ROUND((total_cases / population) * 100, 4)) AS CasesPercent 
 From PortfolioProject1..CovidDeaths
 GROUP BY Location, population
 
--- 5. Создаем такой же view как выше. но дополнительно с группировкой по дате
+-- 5. РЎРѕР·РґР°РµРј С‚Р°РєРѕР№ Р¶Рµ view РєР°Рє РІС‹С€Рµ. РЅРѕ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕ СЃ РіСЂСѓРїРїРёСЂРѕРІРєРѕР№ РїРѕ РґР°С‚Рµ
 Create View DateCasesPercent as
 Select Location, population, date, MAX(total_cases) AS HighestInfRate, MAX(ROUND((total_cases / population) * 100, 4)) AS CasesPercent 
 From PortfolioProject1..CovidDeaths
