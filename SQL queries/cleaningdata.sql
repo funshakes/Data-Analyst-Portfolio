@@ -1,4 +1,4 @@
--- Изменим формат даты с созданием нового столбца
+-- РР·РјРµРЅРёРј С„РѕСЂРјР°С‚ РґР°С‚С‹ СЃ СЃРѕР·РґР°РЅРёРµРј РЅРѕРІРѕРіРѕ СЃС‚РѕР»Р±С†Р°
 ALTER TABLE Housing
 ADD SaleDateConverted Date;
 
@@ -6,7 +6,7 @@ UPDATE Housing
 SET SaleDateConverted = CONVERT(date, SaleDate)
 
 
--- Меняем значение null в столбце PropertyAddress на значение если есть по похожему ParcelID
+-- РњРµРЅСЏРµРј Р·РЅР°С‡РµРЅРёРµ null РІ СЃС‚РѕР»Р±С†Рµ PropertyAddress РЅР° Р·РЅР°С‡РµРЅРёРµ РµСЃР»Рё РµСЃС‚СЊ РїРѕ РїРѕС…РѕР¶РµРјСѓ ParcelID
 UPDATE a
 SET PropertyAddress = ISNULL(a.PropertyAddress, b.PropertyAddress) 
 FROM PortfolioProject1.dbo.Housing a
@@ -16,7 +16,7 @@ JOIN PortfolioProject1.dbo.Housing b
 WHERE a.PropertyAddress IS NULL
 
 
--- Добавляем новые с разбитым адресом дома на адрес, город
+-- Р”РѕР±Р°РІР»СЏРµРј РЅРѕРІС‹Рµ СЃ СЂР°Р·Р±РёС‚С‹Рј Р°РґСЂРµСЃРѕРј РґРѕРјР° РЅР° Р°РґСЂРµСЃ, РіРѕСЂРѕРґ
 ALTER TABLE Housing
 ADD PropertySplitAddress Nvarchar(255);
 
@@ -30,7 +30,7 @@ UPDATE Housing
 SET PropertySplitCity = SUBSTRING(PropertyAddress, CHARINDEX(',', PropertyAddress) + 1, LEN(PropertyAddress))
 
 
--- Добавляем новые столбцы с разбитым другим способом адресом владельца на адрес, город, штат
+-- Р”РѕР±Р°РІР»СЏРµРј РЅРѕРІС‹Рµ СЃС‚РѕР»Р±С†С‹ СЃ СЂР°Р·Р±РёС‚С‹Рј РґСЂСѓРіРёРј СЃРїРѕСЃРѕР±РѕРј Р°РґСЂРµСЃРѕРј РІР»Р°РґРµР»СЊС†Р° РЅР° Р°РґСЂРµСЃ, РіРѕСЂРѕРґ, С€С‚Р°С‚
 ALTER TABLE Housing
 ADD OwnerSplitAddress Nvarchar(255);
 
@@ -50,7 +50,7 @@ UPDATE Housing
 SET OwnerSplitState = PARSENAME(REPLACE(OwnerAddress, ',', '.'), 1)
 
 
--- Приведем значения в столбце SoldAsVacant к единому виду
+-- РџСЂРёРІРµРґРµРј Р·РЅР°С‡РµРЅРёСЏ РІ СЃС‚РѕР»Р±С†Рµ SoldAsVacant Рє РµРґРёРЅРѕРјСѓ РІРёРґСѓ
 UPDATE Housing
 SET SoldAsVacant = CASE WHEN SoldAsVacant = 'Y' THEN 'YES'
 						WHEN SoldAsVacant = 'N' THEN 'NO'
@@ -59,7 +59,7 @@ SET SoldAsVacant = CASE WHEN SoldAsVacant = 'Y' THEN 'YES'
 FROM PortfolioProject1..Housing
 
 
--- Удалим дубликаты из таблицы
+-- РЈРґР°Р»РёРј РґСѓР±Р»РёРєР°С‚С‹ РёР· С‚Р°Р±Р»РёС†С‹
 WITH temp AS(
 SELECT *,
 	ROW_NUMBER() OVER (
@@ -78,6 +78,6 @@ WHERE row_num > 1
 
 
 
--- Удаляем неиспользуемые столбцы
+-- РЈРґР°Р»СЏРµРј РЅРµРёСЃРїРѕР»СЊР·СѓРµРјС‹Рµ СЃС‚РѕР»Р±С†С‹
 ALTER TABLE PortfolioProject1.dbo.Housing
 DROP COLUMN OwnerAddress, TaxDistrict, PropertyAddress, SaleDate
