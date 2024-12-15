@@ -9,8 +9,19 @@
 </head>
 <body>
     <header>
+        <div class = "header-contact">
+            <a href="tel:+7(926)405-82-02" target="_blank" title="Позвонить">
+                <img src="images/phone-call.png" alt="Email" style="width: 50px; margin: 0 10px;">
+            </a>
+            <a href="mailto:andrianov.semen@list.ru" target="_blank" title="Написать на почту">
+                <img src="images/mail.png" alt="Email" style="width: 50px; margin: 0 10px;">
+            </a>
+            <a href="https://t.me/funshake" target="_blank" title="Написать в Telegram">
+                <img src="images/telegram.png" alt="Telegram" style="width: 50px; margin: 0 10px;">
+            </a>
+        </div>
         <div class="container">
-            <h1>Привет! Я Семён</h1>
+            <h1>Портфолио Андрианова Семёна</h1>
             <p>Дата-аналитик, работающий с Power BI, Tableau, SQL и Python. Здесь вы найдёте мои работы.</p>
         </div>
     </header>
@@ -100,174 +111,10 @@
                     <span class="project">Просмотреть SQL запросы</span></a>
             </div>
             <div class="sql-query">
-                <style>
-                    table {
-                        width: 100%;
-                        border-collapse: collapse;
-                        margin: 20px 0;
-                        font-size: 18px;
-                        text-align: left;
-                    }
-                    th, td {
-                        border: 1px solid #ddd;
-                        padding: 8px;
-                    }
-                    th {
-                        background-color: #f4f4f4;
-                        font-weight: bold;
-                    }
-                    tr:nth-child(even) {
-                        background-color: #f9f9f9;
-                    }
-                    tr:hover {
-                        background-color: #f1f1f1;
-                    }
-                </style>
-                <body>
-                    <h1>employees Table</h1>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>id</th>
-                                <th>name</th>
-                                <th>department</th>
-                                <th>salary</th>
-                                <th>hire Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Alice</td>
-                                <td>IT</td>
-                                <td>60000</td>
-                                <td>2019-05-20</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Bob</td>
-                                <td>HR</td>
-                                <td>50000</td>
-                                <td>2020-08-15</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Charlie</td>
-                                <td>IT</td>
-                                <td>75000</td>
-                                <td>2018-10-10</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>David</td>
-                                <td>Sales</td>
-                                <td>55000</td>
-                                <td>2021-01-05</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Eve</td>
-                                <td>IT</td>
-                                <td>70000</td>
-                                <td>2017-12-11</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </body>
-                <body>
-                    <h1>departments Table</h1>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>department</th>
-                                <th>budget</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>IT</td>
-                                <td>250000</td>
-                            </tr>
-                            <tr>
-                                <td>HR</td>
-                                <td>100000</td>
-                            </tr>
-                            <tr>
-                                <td>Sales</td>
-                                <td>150000</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </body>
+                <h3>Работа с зарплатами</h3>
+                <a href="https://github.com/funshakes/Data-Analyst-Portfolio/blob/main/SQL%20queries/salary%20queries.sql">
+                    <span class="project">Просмотреть SQL запросы</span></a>
             </div>
-            <div class="sql-query">
-                <h3>Пример 1: Сотрудники с зарплатой выше среднего по их отделу</h3>
-                <code>
-                    SELECT name, department, salary<br
-                    FROM employees e<br>
-                    WHERE salary > (<br>
-                        SELECT AVG(salary)<br>
-                        FROM employees<br>
-                        WHERE department = e.department<br>
-                    );
-                </code>
-                <p>Для каждого сотрудника сравнивается его зарплата со средней зарплатой по его отделу.<br>
-                    Подзапрос вычисляет среднюю зарплату для текущего отдела (e.department).</p>
-            </div>
-            <div class="sql-query">
-                <h3>Пример 2: Топ-2 самых высокооплачиваемых сотрудников в каждом отделе</h3>
-                <code>
-                    SELECT name, department, salary<br>
-                    FROM employees e1<br>
-                    WHERE salary >= (<br>
-                        SELECT MIN(salary)<br>
-                        FROM (<br>
-                            SELECT salary<br>
-                            FROM employees e2<br>
-                            WHERE e2.department = e1.department<br>
-                            ORDER BY salary DESC<br>
-                            LIMIT 2<br>
-                        )<br>
-                    );
-                </code>
-                <p>Внутренний подзапрос выбирает две самые высокие зарплаты в отделе.<br>
-                    Внешний запрос возвращает сотрудников с зарплатой, входящей в эти значения.</p>
-            </div>
-            <div class="sql-query">
-                <h3>Пример 3: Сумма зарплат по отделу</h3>
-                <code>
-                    SELECT name, department, salary,<br> 
-                        SUM(salary) OVER (PARTITION BY department) AS total_department_salary<br>
-                    FROM employees;
-                </code>
-                <p>Функция SUM() с оконной функцией вычисляет общую сумму зарплат по каждому отделу (PARTITION BY department).</p>
-            </div>
-            <div class="sql-query">
-                <h3>Пример 4: Рейтинг сотрудников по зарплате в отделе</h3>
-                <code>
-                    SELECT name, department, salary,<br> 
-                        RANK() OVER (PARTITION BY department ORDER BY salary DESC) AS rank_in_department<br>
-                    FROM employees;
-                </code>
-                <p>RANK() вычисляет позицию сотрудника в отделе по убыванию зарплаты.<br>
-                    Если у сотрудников одинаковая зарплата, им присваивается одинаковый ранг.</p>
-            </div>
-            <div class="sql-query">
-                <h3>Пример 5: Средняя зарплата старше 2 лет в компании</h3>
-                <code>
-                    WITH long_term_employees AS (<br>
-                        SELECT id, name, salary, department<br>
-                        FROM employees<br>
-                        WHERE hire_date < CURRENT_DATE - INTERVAL '2 years'<br>
-                    )<br>
-                    SELECT name, department, salary,<br>
-                        AVG(salary) OVER (PARTITION BY department) AS avg_salary_in_department<br>
-                    FROM long_term_employees;
-                </code>
-                <p>Временная таблица (long_term_employees) отбирает сотрудников, работающих более двух лет.<br>
-                    Затем оконная функция вычисляет среднюю зарплату для каждого отдела среди этих сотрудников.</p>
-            </div>
-        </section>
     </main>
     <footer style="text-align: center; margin-top: 50px;">
         <a href="mailto:andrianov.semen@list.ru" target="_blank" title="Написать на почту">

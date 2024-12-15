@@ -8,10 +8,19 @@ body {
 }
 
 header {
-    background: #0078d7;
+    background-image: url('images/header.jpg');
+    background-size: cover;
+    background-position: center;
     color: #fff;
     padding: 2rem 0;
     text-align: center;
+}
+
+.header-contact {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    gap: 30px;
 }
 
 header h1 {
